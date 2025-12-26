@@ -4,8 +4,8 @@ struct LandmarkDetail: View {
     @Environment(ModelData.self) var modelData
     var landmark: Landmark
     
-    var landmarkIndex: Int {
-        modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
+    var landmarkIndex: Int? {
+        modelData.landmarks.firstIndex { $0.id == landmark.id }
     }
     
     var body: some View {
@@ -20,7 +20,9 @@ struct LandmarkDetail: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(landmark.name).font(.title)
-                    FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+                    if let index = landmarkIndex {
+                        FavoriteButton(isSet: $modelData.landmarks[index].isFavorite)
+                    }
                 }
                 
                 

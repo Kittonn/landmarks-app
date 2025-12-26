@@ -2,8 +2,14 @@ import Foundation
 
 @Observable
 class ModelData {
-    var landmarks: [Landmark] = load("landmarkData.json")
+    var landmarks: [Landmark] = []
+
+    init() {
+        landmarks = load("landmarkData.json")
+        print("Landmarks count:", landmarks.count)
+    }
 }
+
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
